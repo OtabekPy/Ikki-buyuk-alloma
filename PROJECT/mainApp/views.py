@@ -29,12 +29,22 @@ class AudiosAPIView(APIView):
         return Response(serializer.data)
 
 
-class AudioAPIView(APIView):
+# class AudioAPIView(APIView):
+#     @swagger_auto_schema(
+#         operation_description="Get audio by ID",
+#         responses={200: AudioSerializer()}
+#     )
+#     def get(self, request, pk):
+#         audio = Audio.objects.get(id=pk)
+#         serializer = AudioSerializer(audio)
+#         return Response(serializer.data)
+
+class AudiosByTopicAPIView(APIView):
     @swagger_auto_schema(
-        operation_description="Get audio by ID",
+        operation_description="Get audios by topic",
         responses={200: AudioSerializer()}
     )
     def get(self, request, pk):
-        audio = Audio.objects.get(id=pk)
-        serializer = AudioSerializer(audio)
+        audios = Audio.objects.filter(topic__id=pk)
+        serializer = AudioSerializer(audios, many=True)
         return Response(serializer.data)

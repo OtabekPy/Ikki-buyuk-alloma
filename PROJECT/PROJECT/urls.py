@@ -29,7 +29,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('topics/', TopicsAPIView.as_view()),
     path('audios/', AudiosAPIView.as_view()),
-    path('audios/<int:pk>/', AudioAPIView.as_view()),
+    path('audios/<int:pk>/', AudiosByTopicAPIView.as_view()),
     path('', schema_view.with_ui('swagger', cache_timeout=0)),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0)),
 
